@@ -5,9 +5,12 @@ organization := "org.tupol"
 
 scalaVersion := "2.11.12"
 
-val scalaUtilsVersion = "0.2.0"
 
+val scalaUtilsVersion = "0.2.0"
 val sparkVersion = "2.3.2"
+val sparkXmlVersion = "0.4.1"
+val sparkAvroVersion = "4.0.0"
+val kafkaVersion = "0.8.2.1"
 
 // ------------------------------
 // DEPENDENCIES AND RESOLVERS
@@ -23,8 +26,10 @@ lazy val providedDependencies = Seq(
   "org.apache.spark" %% "spark-sql" % sparkVersion force(),
   "org.apache.spark" %% "spark-mllib" % sparkVersion force(),
   "org.apache.spark" %% "spark-streaming" % sparkVersion force(),
-  "com.databricks" %% "spark-xml" % "0.4.1",
-  "com.databricks" %% "spark-avro" % "4.0.0"
+  "com.databricks" %% "spark-xml" % sparkXmlVersion,
+  "com.databricks" %% "spark-avro" % sparkAvroVersion,
+  "org.apache.kafka" %% "kafka" % kafkaVersion,
+  "org.apache.spark" %% "spark-streaming-kafka-0-10" % sparkVersion
 )
 
 libraryDependencies ++= providedDependencies.map(_ % "provided")
@@ -33,10 +38,13 @@ libraryDependencies ++= Seq(
   "org.tupol" %% "scala-utils" % scalaUtilsVersion,
   "org.scalacheck" %% "scalacheck" % "1.14.0" % "test",
   "org.scalatest" %% "scalatest" % "3.0.5" % "test",
-  "com.databricks" %% "spark-xml" % "0.4.1" % "test",
-  "com.databricks" %% "spark-avro" % "4.0.0" % "test",
-  "com.h2database" % "h2" % "1.4.197" % "test"
+  "com.h2database" % "h2" % "1.4.197" % "test",
+  "com.databricks" %% "spark-xml" % sparkXmlVersion % "test",
+  "com.databricks" %% "spark-avro" % sparkAvroVersion % "test",
+  "org.apache.spark" %% "spark-streaming-kafka-0-10" % sparkVersion % "test",
+  "org.apache.kafka" %% "kafka" % kafkaVersion % "test" classifier "test"
 )
+
 // ------------------------------
 // TESTING
 parallelExecution in Test := false
@@ -50,7 +58,6 @@ publishArtifact in Test := true
 
 scoverage.ScoverageKeys.coverageExcludedPackages := "org.apache.spark.ml.param.shared.*"
 scoverage.ScoverageKeys.coverageExcludedFiles := ".*BuildInfo.*"
-
 
 // ------------------------------
 // PUBLISHING
@@ -93,6 +100,7 @@ developers := List(
     url   = url("https://github.com/tupol")
   )
 )
+
 releasePublishArtifactsAction := PgpKeys.publishSigned.value
 import ReleaseTransformations._
 releaseProcess := Seq[ReleaseStep](
@@ -103,7 +111,6 @@ releaseProcess := Seq[ReleaseStep](
   setReleaseVersion,
   commitReleaseVersion,          // performs the initial git checks
   tagRelease,
-  publishArtifacts,              // checks whether `publishTo` is properly set up
   releaseStepCommand(s"""sonatypeOpen "${organization.value}" "${name.value} v${version.value}""""),
   releaseStepCommand("publishSigned"),
   releaseStepCommand("sonatypeRelease"),
@@ -133,4 +140,3 @@ buildInfoKeys ++= Seq[BuildInfoKey](
 buildInfoOptions += BuildInfoOption.BuildTime
 buildInfoOptions += BuildInfoOption.ToMap
 buildInfoOptions += BuildInfoOption.ToJson
-
