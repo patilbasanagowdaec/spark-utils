@@ -1,7 +1,7 @@
-package org.tupol.spark.streaming.configuration
+package org.tupol.spark.streaming.direct.configuration
 
-import com.typesafe.config.{ConfigFactory, ConfigValueFactory}
-import org.scalatest.{FunSuite, Matchers}
+import com.typesafe.config.{ ConfigFactory, ConfigValueFactory }
+import org.scalatest.{ FunSuite, Matchers }
 
 class StreamingIntervalSpec extends FunSuite with Matchers {
 

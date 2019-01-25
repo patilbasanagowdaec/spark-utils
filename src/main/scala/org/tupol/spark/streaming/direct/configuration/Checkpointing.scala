@@ -1,7 +1,6 @@
-package org.tupol.spark.streaming.configuration
+package org.tupol.spark.streaming.direct.configuration
 
 import org.tupol.utils.config.Configurator
-
 
 /**
  * Marker trait that indicates that the implementing class is aware

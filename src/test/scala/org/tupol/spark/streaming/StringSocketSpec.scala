@@ -1,9 +1,9 @@
 package org.tupol.spark.streaming
 
 import java.io.PrintStream
-import java.net.{ServerSocket, Socket}
+import java.net.{ ServerSocket, Socket }
 
-import org.scalatest.{BeforeAndAfterAll, Suite}
+import org.scalatest.{ BeforeAndAfterAll, Suite }
 
 import scala.util.Try
 
@@ -26,9 +26,8 @@ trait StringSocketSpec extends BeforeAndAfterAll {
   }
 
   override def afterAll(): Unit = {
-    if(_server != null) _server.close
+    if (_server != null) _server.close
   }
-
 
   def send(record: String): Unit = {
     val out = new PrintStream(_socket.getOutputStream())

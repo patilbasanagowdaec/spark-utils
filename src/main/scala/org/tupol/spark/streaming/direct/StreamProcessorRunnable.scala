@@ -1,14 +1,14 @@
-package org.tupol.spark.streaming
+package org.tupol.spark.streaming.direct
 
 import org.apache.spark.SparkContext
 import org.apache.spark.streaming._
 import org.apache.spark.streaming.dstream.DStream
-import org.tupol.spark.SparkRunnable
-import org.tupol.spark.streaming.configuration.{SparkCheckpointing, SparkStreamingInterval, StreamSourceConfiguration}
+import org.tupol.spark.SparkApp
+import org.tupol.spark.streaming.direct.configuration.{ SparkCheckpointing, SparkStreamingInterval, StreamSourceConfiguration }
 import org.tupol.utils._
 
 import scala.reflect.ClassTag
-import scala.util.{Failure, Success, Try}
+import scala.util.{ Failure, Success, Try }
 
 /**
  * Simple trait for basic streaming processing providing also the infrastructure to make it runnable.
@@ -23,7 +23,7 @@ import scala.util.{Failure, Success, Try}
  * @tparam C type of configuration case class being passed in.
  */
 abstract class StreamProcessorRunnable[K: ClassTag, V: ClassTag, C <: SparkStreamingInterval with StreamSourceConfiguration]
-    extends SparkRunnable[C, Unit] with StreamProcessor[K, V, C] with InputStreamFactory[K, V, C] {
+  extends SparkApp[C, Unit] with StreamProcessor[K, V, C] with InputStreamFactory[K, V, C] {
 
   /**
    * Factory for processingFunction.
@@ -121,8 +121,7 @@ abstract class StreamProcessorRunnable[K: ClassTag, V: ClassTag, C <: SparkStrea
         .logFailure(logError(
           """Error while running the stream.
             |If the exception bellow provides no clue, please double check the entire configuration and pay special attention
-            |to the stream configuration (start with the topics).""".stripMargin, _
-        ))
+            |to the stream configuration (start with the topics).""".stripMargin, _))
         .recoverWith {
           case t: Throwable =>
             closeStreamingContext(ssc)

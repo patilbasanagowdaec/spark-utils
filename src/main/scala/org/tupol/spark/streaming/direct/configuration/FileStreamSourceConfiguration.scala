@@ -1,4 +1,4 @@
-package org.tupol.spark.streaming.configuration
+package org.tupol.spark.streaming.direct.configuration
 
 /**
  * FileStream specific configuration parameters.

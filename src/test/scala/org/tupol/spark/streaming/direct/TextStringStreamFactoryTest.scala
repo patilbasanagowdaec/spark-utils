@@ -1,21 +1,22 @@
-package org.tupol.spark.streaming
+package org.tupol.spark.streaming.direct
 
 import org.apache.spark.streaming.SparkStreamingSpec
 import org.scalatest._
 import org.scalatest.concurrent.Eventually
-import org.scalatest.time.{Millis, Span}
-import org.tupol.spark.streaming.configuration.SocketStreamSourceConfiguration
+import org.scalatest.time.{ Millis, Span }
+import org.tupol.spark.streaming.StringSocketSpec
+import org.tupol.spark.streaming.direct.configuration.SocketStreamSourceConfiguration
 import org.tupol.spark.streaming.mocks._
 
-import scala.util.{Failure, Success}
+import scala.util.{ Failure, Success }
 
 class TextStringStreamFactoryTest extends FlatSpec
-    with Matchers with GivenWhenThen with Eventually with BeforeAndAfter
-    with SparkStreamingSpec with StringSocketSpec
-    with TextSocketInputStreamFactory[SocketStreamSourceConfiguration] {
+  with Matchers with GivenWhenThen with Eventually with BeforeAndAfter
+  with SparkStreamingSpec with StringSocketSpec
+  with TextSocketInputStreamFactory[SocketStreamSourceConfiguration] {
 
   val TestConfig = SocketStreamSourceConfiguration("localhost", port)
-  
+
   implicit override val patienceConfig = PatienceConfig(timeout = scaled(Span(10000, Millis)))
 
   "String messages" should "be written to the socket stream, transformed and read back" in {

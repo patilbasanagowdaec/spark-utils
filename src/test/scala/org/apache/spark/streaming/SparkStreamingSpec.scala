@@ -1,6 +1,6 @@
 package org.apache.spark.streaming
 
-import org.scalatest.{BeforeAndAfterEach, Suite}
+import org.scalatest.{ BeforeAndAfterEach, Suite }
 import org.tupol.spark.SharedSparkSession
 
 /**

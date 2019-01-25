@@ -1,8 +1,8 @@
-package org.tupol.spark.streaming
+package org.tupol.spark.streaming.direct
 
 import org.apache.spark.rdd.RDD
 import org.apache.spark.streaming.dstream.DStream
-import org.tupol.spark.streaming.configuration.StreamSourceConfiguration
+import org.tupol.spark.streaming.direct.configuration.StreamSourceConfiguration
 
 import scala.reflect.ClassTag
 import scala.util.Try

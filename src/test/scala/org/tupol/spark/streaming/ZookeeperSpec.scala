@@ -1,9 +1,9 @@
 package org.tupol.spark.streaming
 
-import kafka.utils.{TestZKUtils, ZKStringSerializer}
+import kafka.utils.{ TestZKUtils, ZKStringSerializer }
 import kafka.zk.EmbeddedZookeeper
 import org.I0Itec.zkclient.ZkClient
-import org.scalatest.{BeforeAndAfterAll, Suite}
+import org.scalatest.{ BeforeAndAfterAll, Suite }
 
 /**
  *

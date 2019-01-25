@@ -1,10 +1,13 @@
-package org.tupol.spark
+package org.tupol.spark.streaming.direct
 
 import org.apache.spark.streaming.dstream.DStream
-import org.tupol.spark.streaming.configuration.StreamingInterval
+import org.tupol.spark.streaming.direct.configuration.StreamingInterval
 
 import scala.reflect.ClassTag
 
+/**
+ *
+ */
 package object streaming {
 
   /**
@@ -31,8 +34,7 @@ package object streaming {
     stream: DStream[(K, V)],
     reduceFunction: (V, V) => V,
     invReduceFunction: Option[(V, V) => V],
-    interval: StreamingInterval
-  ): DStream[(K, V)] =
+    interval: StreamingInterval): DStream[(K, V)] =
     (interval.windowDuration, interval.slideDuration, invReduceFunction) match {
       case (Some(windowDuration), Some(slideDuration), Some(invRedFun)) =>
         stream.reduceByKeyAndWindow(reduceFunction, invRedFun, windowDuration, slideDuration)

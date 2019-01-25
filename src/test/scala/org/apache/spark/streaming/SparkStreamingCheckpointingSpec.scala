@@ -3,7 +3,7 @@ package org.apache.spark.streaming
 import java.io.File
 
 import org.apache.commons.io.FileUtils
-import org.scalatest.{BeforeAndAfterEach, Suite}
+import org.scalatest.{ BeforeAndAfterEach, Suite }
 import org.tupol.spark.SharedSparkSession
 
 /**
@@ -14,8 +14,7 @@ trait SparkStreamingCheckpointingSpec extends SharedSparkSession with BeforeAndA
 
   def checkpointDirectory: File = new File(
     FileUtils.getTempDirectoryPath,
-    s"mlx-checkpointing-test-${getClass.getSimpleName.replaceAll("\\$", "")}"
-  )
+    s"mlx-checkpointing-test-${getClass.getSimpleName.replaceAll("\\$", "")}")
 
   @transient private var _ssc: StreamingContext = _
 

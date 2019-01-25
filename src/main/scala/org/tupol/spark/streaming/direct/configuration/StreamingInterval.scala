@@ -1,7 +1,7 @@
-package org.tupol.spark.streaming.configuration
+package org.tupol.spark.streaming.direct.configuration
 
 import com.typesafe.config.ConfigException.BadValue
-import org.apache.spark.streaming.{Duration, Milliseconds, Minutes, Seconds}
+import org.apache.spark.streaming.{ Duration, Milliseconds, Minutes, Seconds }
 import org.tupol.utils.config.Configurator
 
 /**

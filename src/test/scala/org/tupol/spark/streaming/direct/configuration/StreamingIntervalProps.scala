@@ -1,9 +1,9 @@
-package org.tupol.spark.streaming.configuration
+package org.tupol.spark.streaming.direct.configuration
 
-import com.typesafe.config.{ConfigFactory, ConfigValueFactory}
+import com.typesafe.config.{ ConfigFactory, ConfigValueFactory }
 import org.scalatest.prop.Checkers
 import org.scalatest.prop.TableDrivenPropertyChecks._
-import org.scalatest.{FunSuite, Matchers}
+import org.scalatest.{ FunSuite, Matchers }
 import org.tupol.utils.config.ConfigurationException
 
 import scala.util.Success
@@ -65,8 +65,7 @@ class StreamingIntervalProps extends FunSuite with Matchers with Checkers {
     ConfigFactory.empty
       .withValue("batch.duration.minutes", ConfigValueFactory.fromAnyRef(7))
       .withValue("window.duration.minutes", ConfigValueFactory.fromAnyRef(21))
-      .withValue("slide.duration.minutes", ConfigValueFactory.fromAnyRef(14))
-  )
+      .withValue("slide.duration.minutes", ConfigValueFactory.fromAnyRef(14)))
 
   val badConfigurations = Table(
     "Bad Configurations",
@@ -115,7 +114,6 @@ class StreamingIntervalProps extends FunSuite with Matchers with Checkers {
     ConfigFactory.empty
       .withValue("batch.duration.seconds", ConfigValueFactory.fromAnyRef(7))
       .withValue("window.duration.minutes", ConfigValueFactory.fromAnyRef(1))
-      .withValue("slide.duration.minutes", ConfigValueFactory.fromAnyRef(2))
-  )
+      .withValue("slide.duration.minutes", ConfigValueFactory.fromAnyRef(2)))
 
 }
